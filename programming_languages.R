@@ -23,4 +23,25 @@ ggplot(r_and_packages, aes(x = year, y = fraction, color = tag)) + geom_line()
 sorted_tags <- by_tag_year %>% group_by(tag) %>%
   summarize(total_tags = sum(number)) %>% arrange(desc(total_tags))
 
+#trends in the top tags
+highest_tags <- head(sorted_tags$tag)
+highest_subset <- by_tag_year_fraction %>% filter(tag %in% highest_tags) %>%
+  ggplot(aes(x = year, y = fraction, color = tag)) + geom_line()
+
+highest_subset
+
+#trends in the bottom tags
+lowest_tags <- tail(sorted_tags$tag)
+lowest_subset <- by_tag_year_fraction %>% filter(tag %in% lowest_tags) %>%
+  ggplot(aes(x = year, y = fraction, color = tag)) + geom_line()
+
+lowest_subset
+
+# 
+
+
+
+
+
+
 
