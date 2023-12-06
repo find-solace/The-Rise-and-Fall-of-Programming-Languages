@@ -26,18 +26,22 @@ sorted_tags <- by_tag_year %>% group_by(tag) %>%
 #trends in the top tags
 highest_tags <- head(sorted_tags$tag)
 highest_subset <- by_tag_year_fraction %>% filter(tag %in% highest_tags) %>%
-  ggplot(aes(x = year, y = fraction, color = tag)) + geom_line()
 
-highest_subset
+ggplot(highest_subset, aes(x = year, y = fraction, color = tag)) + geom_line()
+
 
 #trends in the bottom tags
 lowest_tags <- tail(sorted_tags$tag)
-lowest_subset <- by_tag_year_fraction %>% filter(tag %in% lowest_tags) %>%
-  ggplot(aes(x = year, y = fraction, color = tag)) + geom_line()
+lowest_subset <- by_tag_year_fraction %>% filter(tag %in% lowest_tags)
 
-lowest_subset
+ggplot(lowest_subset, aes(x = year, y = fraction, color = tag)) + geom_line()
 
-# 
+
+#trends in popularity of ios, android, and windows-phone operating systems
+os_tags <- c("ios", "windows-phone", "android")
+os_subset <- by_tag_year_fraction %>% filter(tag %in% os_tags)
+
+ggplot(os_subset, aes(x = year, y = fraction, color = tag)) + geom_line()
 
 
 
