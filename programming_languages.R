@@ -19,5 +19,8 @@ r_and_packages <- by_tag_year_fraction %>% filter(tag %in% selected_packages)
 
 ggplot(r_and_packages, aes(x = year, y = fraction, color = tag)) + geom_line()
 
+#tags with most questions overall
+sorted_tags <- by_tag_year %>% group_by(tag) %>%
+  summarize(total_tags = sum(number)) %>% arrange(desc(total_tags))
 
 
