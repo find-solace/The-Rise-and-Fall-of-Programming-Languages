@@ -1,9 +1,14 @@
 #reading libraries and dataset
 library(readr)
 library(dplyr)
+library(ggplot2)
 
 by_tag_year <- read_csv("by_tag_year.csv")
 glimpse(by_tag_year)
 
 #represent tags as fraction of the total questions in the year
 by_tag_year_fraction <- by_tag_year %>% mutate(fraction = number/year_total)
+
+#Examining trends in popularity of R language
+r_over_time <- by_tag_year_fraction %>% filter(tag == "r")
+ggplot(r_over_time, aes(x = year, y = fraction)) + geom_line()
